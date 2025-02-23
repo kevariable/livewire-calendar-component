@@ -34,7 +34,6 @@ final readonly class GenerateMonthGridAction
         $endsAt = $monthGrid->last();
 
         $leagueMatches = LeagueMatch::query()
-            ->with(['teamHome', 'teamAway', 'league'])
             ->applyLeagueFilter($data->league)
             ->applyTeamFilter($data->team)
             ->groupByMatchDateBetween($startsAt, $endsAt);

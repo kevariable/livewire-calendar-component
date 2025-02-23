@@ -26,8 +26,8 @@ final class LeagueMatchBuilder extends Builder
     {
         return $this->orderByRaw("
             CASE 
-                WHEN league_name = 'NBA - G League' THEN 2
-                WHEN league_name = 'Pro B' THEN 1
+                WHEN league_name = 'NBA - G League' THEN 1
+                WHEN league_name = 'Pro B' THEN 2
                 WHEN league_name = 'Basketligaen' THEN 3
                 ELSE 4
             END
@@ -54,7 +54,7 @@ final class LeagueMatchBuilder extends Builder
             callback: fn (LeagueMatchBuilder $query) => $query->where(
                 fn (LeagueMatchBuilder $query) => $query
                     ->where(column: 'home_team_id', operator: '=', value: $team)
-                    ->orWhere(column: 'home_away_id', operator: '=', value: $team)
+                    ->orWhere(column: 'away_team_id', operator: '=', value: $team)
             )
         );
     }
