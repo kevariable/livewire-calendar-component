@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Actions\Calendar\GenerateMonthGridAction;
-use App\Builders\LeagueMatchBuilder;
 use App\Data\MonthGridMetaData;
 use App\Models\League;
 use App\Models\LeagueMatch;
@@ -16,8 +15,6 @@ use Illuminate\View\View;
 use Livewire\Component;
 
 /**
- * Class LivewireCalendar
- * @package Omnia\LivewireCalendar
  * @property Carbon $startsAt
  * @property Carbon $endsAt
  * @property Carbon $gridStartsAt
@@ -159,11 +156,6 @@ final class CalendarComponent extends Component
             ->toArray();
     }
 
-    public function events() : Collection
-    {
-        return collect();
-    }
-
     public function onDayClick(string $year, string $month, string $day): void
     {
         $this->currentDate = $year.'-'.$month.'-'.$day;
@@ -185,12 +177,9 @@ final class CalendarComponent extends Component
      */
     public function render(): View
     {
-        $events = $this->events();
-
         return view('livewire.calendar')
             ->with([
                 'monthGrid' => $this->monthGrid(),
-                'events' => $events,
             ]);
     }
 }

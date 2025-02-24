@@ -2,13 +2,11 @@
 
 namespace App\Actions\Calendar;
 
-use App\Builders\LeagueMatchBuilder;
 use App\Data\MonthGridData;
 use App\Data\MonthGridMetaData;
 use App\Models\LeagueMatch;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 final readonly class GenerateMonthGridAction
@@ -24,7 +22,7 @@ final readonly class GenerateMonthGridAction
 
         $currentDay = $data->firstDayOfGrid->clone();
 
-        while(! $currentDay->greaterThan($data->lastDayOfGrid)) {
+        while (! $currentDay->greaterThan($data->lastDayOfGrid)) {
             $monthGrid->push($currentDay->clone());
 
             $currentDay->addDay();

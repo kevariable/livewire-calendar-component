@@ -2,7 +2,6 @@
 
 namespace App\Observers;
 
-
 use App\Models\LeagueMatch;
 
 final class UpdateLeagueTitleObserver

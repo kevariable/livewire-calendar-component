@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @mixin LeagueBuilder
  */
-final  class League extends Model
+final class League extends Model
 {
     /** @use HasFactory<LeagueFactory> */
     use HasFactory;

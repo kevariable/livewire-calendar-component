@@ -96,7 +96,7 @@
 
 				<x-slot name="content">
 						<div class="overflow-y-auto h-[500px]">
-								@foreach($this->currentMatches ?? [] as $match)
+								@foreach($this->currentMatches as $match)
 										<div class="border rounded-lg p-4 mb-4">
 												<p class="font-bold">{{ $match->league->name }}: {{ $match->match_date->format('H:i')  }}, {{ $match->location }}</p>
 												<p class="text-gray-600">{{ $match->teamHome->name }} vs {{ $match->teamAway->name }}</p>

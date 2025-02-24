@@ -2,7 +2,6 @@
 
 namespace App\Builders;
 
-use App\Models\League;
 use App\Models\Team;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
