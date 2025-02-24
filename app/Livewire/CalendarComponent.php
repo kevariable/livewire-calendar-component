@@ -113,7 +113,6 @@ final class CalendarComponent extends Component
     {
         $this->gridStartsAt = $this->startsAt->clone()->startOfWeek($this->weekStartsAt);
         $this->gridEndsAt = $this->endsAt->clone()->endOfWeek($this->weekEndsAt);
-
     }
 
     /**
@@ -137,7 +136,9 @@ final class CalendarComponent extends Component
      */
     public function applyFilters(): void
     {
-        $league = League::query()->find($this->filters['league']);
+        $leagueId = $this->filters['league'];
+
+        $league = is_numeric($leagueId) ? League::query()->find($leagueId) : null;
 
         if (filled($league)) {
             $this->populateTeamsByLeague($league);
