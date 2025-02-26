@@ -12,7 +12,6 @@ use Illuminate\Support\Collection;
 final readonly class GenerateMonthGridAction
 {
     /**
-     * @param \App\Data\MonthGridMetaData $data
      * @return \Illuminate\Support\Collection<int, MonthGridData[]>
      */
     public function execute(MonthGridMetaData $data): Collection

@@ -26,7 +26,6 @@ final class LeagueMatch extends Model
     /** @use HasFactory<\Database\Factories\LeagueMatchFactory> */
     use HasFactory;
 
-
     protected $table = 'matches';
 
     protected $with = [
@@ -41,7 +40,7 @@ final class LeagueMatch extends Model
 
     public function newEloquentBuilder($query): LeagueMatchBuilder
     {
-        return (new LeagueMatchBuilder($query));
+        return new LeagueMatchBuilder($query);
     }
 
     public function league(): BelongsTo

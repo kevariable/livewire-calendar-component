@@ -13,6 +13,5 @@ final readonly class MonthGridData
 
         /** @var Collection<int, LeagueMatch> LeagueMatch */
         public Collection $events
-    ) {
-    }
+    ) {}
 }

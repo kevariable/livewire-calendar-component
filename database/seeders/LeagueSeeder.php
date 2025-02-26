@@ -30,7 +30,9 @@ final class LeagueSeeder extends Seeder
                 foreach ($leagueData as $leagueName => $matches) {
                     $league = $leagues[$leagueName] ?? null;
 
-                    if (! $league) continue;
+                    if (! $league) {
+                        continue;
+                    }
 
                     $teams = $this->createTeamsForLeague($league, $matches);
                     $this->createMatches($league, $teams, $matches);
@@ -43,13 +45,11 @@ final class LeagueSeeder extends Seeder
             }
         });
 
-        $this->command->info('Seed complete in '. $time/1000 .' seconds !');
+        $this->command->info('Seed complete in '.$time / 1000 .' seconds !');
     }
 
     /**
      * Load match data from JSON file
-     *
-     * @return array
      */
     private function loadMatchData(): array
     {
@@ -68,9 +68,6 @@ final class LeagueSeeder extends Seeder
 
     /**
      * Organize matches by league
-     *
-     * @param array $matchData
-     * @return array
      */
     private function organizeMatchesByLeague(array $matchData): array
     {
@@ -99,7 +96,6 @@ final class LeagueSeeder extends Seeder
     /**
      * Create leagues and return a collection keyed by league name
      *
-     * @param array $leagueNames
      * @return Collection<League>
      */
     private function createLeagues(array $leagueNames): Collection
@@ -113,15 +109,13 @@ final class LeagueSeeder extends Seeder
             ->sequence(...$leagueData)
             ->createMany(count($leagueData))
             ->mapWithKeys(fn (League $league) => [
-                $league->name => $league
+                $league->name => $league,
             ]);
     }
 
     /**
      * Create teams for a league
      *
-     * @param League $league
-     * @param array $matches
      * @return Collection<\App\Models\Team>
      */
     private function createTeamsForLeague(League $league, array $matches): Collection
@@ -136,15 +130,12 @@ final class LeagueSeeder extends Seeder
         return $league->teams()
             ->createMany($teamData)
             ->mapWithKeys(fn (Team $team) => [
-                $team->name => $team
+                $team->name => $team,
             ]);
     }
 
     /**
      * Extract unique team names from matches
-     *
-     * @param array $matches
-     * @return array
      */
     private function extractUniqueTeamNames(array $matches): array
     {
@@ -161,10 +152,7 @@ final class LeagueSeeder extends Seeder
     /**
      * Create matches for a league
      *
-     * @param League $league
-     * @param Collection<\App\Models\Team> $teams
-     * @param array $matches
-     * @return void
+     * @param  Collection<\App\Models\Team>  $teams
      */
     private function createMatches(League $league, Collection $teams, array $matches): void
     {

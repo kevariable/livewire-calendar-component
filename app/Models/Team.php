@@ -19,7 +19,6 @@ final class Team extends Model
     /** @use HasFactory<\Database\Factories\TeamFactory> */
     use HasFactory;
 
-
     protected $fillable = ['name', 'league_id'];
 
     public function newEloquentBuilder($query): TeamBuilder

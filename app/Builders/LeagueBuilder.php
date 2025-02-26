@@ -15,7 +15,7 @@ final class LeagueBuilder extends Builder
     {
         return $this->get()->mapWithKeys(
             fn (League $league) => [
-                $league->id => $league->name
+                $league->id => $league->name,
             ]
         );
     }

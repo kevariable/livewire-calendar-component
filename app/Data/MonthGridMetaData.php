@@ -11,6 +11,5 @@ final readonly class MonthGridMetaData
         public Carbon $lastDayOfGrid,
         public ?string $league,
         public ?string $team,
-    ) {
-    }
+    ) {}
 }

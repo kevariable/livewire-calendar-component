@@ -16,7 +16,7 @@ test(description: 'Generates correct month grid without filters')
         $startsAt = $firstDayOfGrid->clone();
         $endsAt = $startsAt->clone()->addDays(value: 5);
 
-        $weeks = floor(abs($firstDayOfGrid->diffInWeeks($lastDayOfGrid)) +1);
+        $weeks = floor(abs($firstDayOfGrid->diffInWeeks($lastDayOfGrid)) + 1);
 
         $league = League::factory()
             ->createOne();
@@ -83,7 +83,7 @@ test(description: 'Generates correct month grid with league filters')
                 'match_date' => fake()->dateTimeBetween(
                     startDate: $firstDayOfGrid->toDateTimeString(),
                     endDate: $lastDayOfGrid->toDateTimeString()
-                )
+                ),
             ]);
 
         $leagueMatch2 = LeagueMatch::factory()
@@ -93,7 +93,7 @@ test(description: 'Generates correct month grid with league filters')
                 'match_date' => fake()->dateTimeBetween(
                     startDate: $firstDayOfGrid->toDateTimeString(),
                     endDate: $lastDayOfGrid->toDateTimeString()
-                )
+                ),
             ]);
 
         $action = resolve(name: GenerateMonthGridAction::class);
@@ -136,7 +136,7 @@ test(description: 'Generates correct month grid with team filters')
                 'match_date' => fake()->dateTimeBetween(
                     startDate: $firstDayOfGrid->toDateTimeString(),
                     endDate: $lastDayOfGrid->toDateTimeString()
-                )
+                ),
             ]);
 
         $leagueMatch2 = LeagueMatch::factory()
@@ -145,7 +145,7 @@ test(description: 'Generates correct month grid with team filters')
                 'match_date' => fake()->dateTimeBetween(
                     startDate: $firstDayOfGrid->toDateTimeString(),
                     endDate: $lastDayOfGrid->toDateTimeString()
-                )
+                ),
             ]);
 
         $action = resolve(name: GenerateMonthGridAction::class);
