@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Actions\Calendar\GenerateMonthGridAction;
 use App\Data\MonthGridMetaData;
+use App\Livewire\Forms\CalendarForm;
 use App\Models\League;
 use App\Models\LeagueMatch;
 use App\Models\Team;
@@ -12,6 +13,8 @@ use Carbon\CarbonInterface;
 use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 /**
@@ -23,6 +26,8 @@ use Livewire\Component;
  * @property int $weekEndsAt
  * @property string $currentDate
  */
+#[Layout('app')]
+#[Title('Livewire Calendar')]
 final class CalendarComponent extends Component
 {
     public $startsAt;
@@ -43,16 +48,13 @@ final class CalendarComponent extends Component
 
     public $openCurrentMatches;
 
-    public $filters = [
-        'league' => null,
-        'team' => null,
-    ];
-
     public array $leagues = [];
 
     public array $teams = [];
 
     public array $teamsFallback = [];
+
+    public CalendarForm $form;
 
     protected $casts = [
         'startsAt' => 'date',
@@ -125,8 +127,8 @@ final class CalendarComponent extends Component
                 new MonthGridMetaData(
                     firstDayOfGrid: $this->gridStartsAt,
                     lastDayOfGrid: $this->gridEndsAt,
-                    league: $this->filters['league'],
-                    team: $this->filters['team'],
+                    league: $this->form->league,
+                    team: $this->form->team,
                 ),
             );
     }
@@ -136,7 +138,9 @@ final class CalendarComponent extends Component
      */
     public function applyFilters(): void
     {
-        $leagueId = $this->filters['league'];
+        $this->form->validate();
+
+        $leagueId = $this->form->league;
 
         $league = is_numeric($leagueId) ? League::query()->find($leagueId) : null;
 
@@ -159,14 +163,16 @@ final class CalendarComponent extends Component
 
     public function onDayClick(string $year, string $month, string $day): void
     {
+        $this->form->validate();
+
         $this->currentDate = $year.'-'.$month.'-'.$day;
 
         $this->currentMatches = LeagueMatch::query()
-            ->applyLeagueFilter($this->filters['league'])
-            ->applyTeamFilter($this->filters['team'])
+            ->applyLeagueFilter($this->form->league)
+            ->applyTeamFilter($this->form->team)
             ->whereMatchDateBy($year, $month, $day)
             ->orderByDefaultWhen(
-                condition: blank($this->filters['league']) && blank($this->filters['team'])
+                condition: blank($this->form->league) && blank($this->form->team),
             )
             ->get();
 

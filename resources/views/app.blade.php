@@ -24,7 +24,7 @@
 
     </head>
     <body>
-        <livewire:calendar-component />
+        {{ $slot }}
 
         @livewireScripts
     </body>

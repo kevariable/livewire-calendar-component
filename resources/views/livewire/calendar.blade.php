@@ -5,7 +5,7 @@
 								class="w-1/2"
 								:options="$leagues"
 								title="League"
-								wire:model="filters.league"
+								wire:model="form.league"
 								wire:change="applyFilters"
 						/>
 
@@ -13,7 +13,7 @@
 							class="w-1/2"
 							:options="$teams"
 							title="Team"
-							wire:model="filters.team"
+							wire:model="form.team"
 							wire:change="applyFilters"
 						/>
 				</div>
